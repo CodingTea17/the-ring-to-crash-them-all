@@ -10,8 +10,15 @@ defmodule Ring do
         Process.link(link_to)
         loop()
 
+      :trap_exit ->
+        Process.flag(:trap_exit, true)
+        loop()
+
       :crash ->
         1/0
+
+      {:EXIT, pid, reason} ->
+        IO.puts("#{inspect self} received (:EXIT, #{inspect pid}, #{reason})")
     end
   end
 
