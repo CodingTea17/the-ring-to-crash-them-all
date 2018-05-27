@@ -18,7 +18,8 @@ defmodule Ring do
         1/0
 
       {:EXIT, pid, reason} ->
-        IO.puts("#{inspect self} received (:EXIT, #{inspect pid}, #{reason})")
+        IO.puts("#{inspect self()} received (:EXIT, #{inspect pid}, #{reason})")
+        loop()
     end
   end
 
